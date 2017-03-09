@@ -9,6 +9,28 @@ class AddressBook
     self.entries = []
   end
 
+  def binary_search(name)
+
+    lower = 0
+    upper = @entries.length - 1
+
+    while lower <= upper
+
+      mid = (lower + upper) / 2
+      mid_name = @entries[mid].name
+
+      if mid_name == name
+        return @entries[mid]
+      elsif mid_name > name
+        upper = mid - 1
+      else
+        lower = mid + 1
+      end
+    end
+
+      return nil
+  end
+
   def import_from_csv(file_name)
     csv_text = File.read(file_name)
     csv = CSV.parse(csv_text, headers: true, skip_blanks: true)
